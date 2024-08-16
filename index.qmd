@@ -16,7 +16,7 @@ execute:
   echo: true
 ---
 
-<h1>Análisis Espacial del Dengue<br>en Oaxaca</h1>
+<h1>Análisis Espacial del Dengue<br>en México</h1>
 
 <h2>
 
@@ -34,19 +34,1387 @@ execute:
 
 <h3>Dr. Fabián Correa-Morales</h3>
 
-<h3>MC. Eduardo Romero-Contreras</h3>
-
 <br> <br>
 
 <h3>Create: 2024-08-13</h3>
 
 <br>
 
-![](oaxaca.jpg){.absolute top="250" left="750" width="800"}
+![](heatmap_tepic.png){.absolute top="250" left="750" width="800"}
 
-```{r setup, echo=FALSE}
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
+
+
+## [Transmisión Activa del Dengue en Nayarit]{ style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
 ```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Semana
+:::
+
+::: grid-item
+Tepic
+:::
+
+::: grid-item
+Bahia de Banderas
+:::
+
+::: grid-item
+San Blas
+:::
+
+::: grid-item
+Acumulado
+:::
+
+::: grid-item
+```{r tepic_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
+
+########
+densnv::mp_heatmap(locality = c("Tepic", "Xalisco"),
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 13,
+                        status_caso = c(1, 2),
+                        week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r bahia_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+########
+densnv::mp_heatmap(locality = "Bahia de Banderas",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 16,
+                        status_caso = c(1, 2),
+                        week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r San_blas_acumulado}
+#| echo: false
+#| output: true
+
+########
+densnv::mp_heatmap(locality = "San Blas",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 15,
+                        status_caso = c(1, 2),
+                        week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+:::
+
+::: grid-item
+Último Més
+:::
+
+::: grid-item
+```{r tepic_ultimo_mes}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+
+########
+densnv::mp_heatmap(locality = c("Tepic", "Xalisco"),
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 13,
+                        status_caso = c(1, 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r bahia_ultimo_mes, error=FALSE}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+########
+densnv::mp_heatmap(locality = "Bahia de Banderas",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 16,
+                        status_caso = c( 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-4, 
+                                   to = lubridate::epiweek(Sys.Date()), 
+                                   by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r San_blas_ultimo_mes}
+#| echo: false
+#| output: true
+
+########
+densnv::mp_heatmap(locality = "San Blas",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 15,
+                        status_caso = c(1, 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+:::
+
+::: grid-item
+Últimas Dos Semanas
+:::
+
+::: grid-item
+```{r tepic_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+
+########
+densnv::mp_heatmap(locality = c("Tepic", "Xalisco"),
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 13,
+                        status_caso = c(1, 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r bahia_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+########
+densnv::mp_heatmap(locality = "Bahia de Banderas",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 16,
+                        status_caso = c( 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r San_blas_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+
+########
+densnv::mp_heatmap(locality = "San Blas",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 15,
+                        status_caso = c(1, 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+:::
+
+
+:::
+
+</body>
+</html>
+
+## [Transmisión Activa del Dengue en Nayarit]{ style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Semana
+:::
+
+::: grid-item
+Santiago Ixcuintla
+:::
+
+::: grid-item
+Tecuala
+:::
+
+::: grid-item
+Tuxpan
+:::
+
+::: grid-item
+Acumulado
+:::
+
+::: grid-item
+```{r santiago_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Santiago Ixcuintla",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 15,
+                        status_caso = c(1, 2),
+                        week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r tecuala_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Tecuala",
+                   cve_edo = "18",
+                   geocoded_datasets = z,
+                   zoom = 15,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r tuxpan_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Tuxpan",
+                   cve_edo = "18",
+                   geocoded_datasets = z,
+                   zoom = 15,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Último Mes
+:::
+
+::: grid-item
+```{r santiago_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Santiago Ixcuintla",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 15,
+                        status_caso = c(1, 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r tecuala_ultimo_mes}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+########
+densnv::mp_heatmap(locality = "Tecuala",
+                   cve_edo = "18",
+                   geocoded_datasets = z,
+                   zoom = 15,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r tuxpan_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Tuxpan",
+                   cve_edo = "18",
+                   geocoded_datasets = z,
+                   zoom = 15,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Últimas dos Semanas
+:::
+
+::: grid-item
+```{r santiago_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Santiago Ixcuintla",
+                        cve_edo = "18",
+                        geocoded_datasets = z,
+                        zoom = 15,
+                        status_caso = c(1, 2),
+                        week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                        alpha = 0.2,
+                        static = TRUE,
+                        map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+```{r tecuala_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Tecuala",
+                   cve_edo = "18",
+                   geocoded_datasets = z,
+                   zoom = 15,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r tuxpan_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Tuxpan",
+                   cve_edo = "18",
+                   geocoded_datasets = z,
+                   zoom = 15,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+
+:::
+
+</body>
+</html>
+
+
+
+## [Transmisión Activa del Dengue en Morelos]{ style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Semana
+:::
+
+::: grid-item
+Cuernavaca
+:::
+
+::: grid-item
+Juitepec
+:::
+
+::: grid-item
+Temixco
+:::
+
+::: grid-item
+Acumulado
+:::
+
+::: grid-item
+```{r cuernavaca_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Cuernavaca",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r juitepec_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Jiutepec",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r temixco_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Temixco",
+                    cve_edo = "17",
+                    geocoded_datasets = z,
+                    zoom = 13,
+                    status_caso = c(1, 2),
+                    week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                    alpha = 0.2,
+                    static = TRUE,
+                    map_type = "satellite")
+```
+:::
+
+::: grid-item
+Último Mes
+:::
+
+::: grid-item
+```{r cuernavaca_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Cuernavaca",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r jiutepec_ultimo_mes}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+########
+densnv::mp_heatmap(locality = "Jiutepec",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r temixco_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Temixco",
+                    cve_edo = "17",
+                    geocoded_datasets = z,
+                    zoom = 13,
+                    status_caso = c(1, 2),
+                    week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                    alpha = 0.2,
+                    static = TRUE,
+                    map_type = "satellite")
+```
+:::
+
+::: grid-item
+Últimas dos Semanas
+:::
+
+::: grid-item
+```{r cuernavaca_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Cuernavaca",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+```{r juitepec_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Jiutepec",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r temixco_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Temixco",
+                    cve_edo = "17",
+                    geocoded_datasets = z,
+                    zoom = 13,
+                    status_caso = c(1, 2),
+                    week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                    alpha = 0.2,
+                    static = TRUE,
+                    map_type = "satellite")
+```
+:::
+
+
+:::
+
+</body>
+</html>
+
+
+## [Transmisión Activa del Dengue en Morelos]{ style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Semana
+:::
+
+::: grid-item
+Cuautla
+:::
+
+::: grid-item
+Jujutla
+:::
+
+::: grid-item
+Emiliano Zapata
+:::
+
+::: grid-item
+Acumulado
+:::
+
+::: grid-item
+```{r cuautla_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Cuautla",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r jojutla_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Jojutla",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 16,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r emiliano_zapata_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Emiliano Zapata",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Último Mes
+:::
+
+::: grid-item
+```{r cuautla_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Cuautla",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r jojutla_ultimo_mes}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Jojutla",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 16,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r emiliano_zapata_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Emiliano Zapata",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Últimas dos Semanas
+:::
+
+::: grid-item
+```{r cuautla_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Cuautla",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+```{r jojutla_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Jojutla",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 16,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r emiliano_zapata_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Emiliano Zapata",
+                   cve_edo = "17",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+
+:::
+
+</body>
+</html>
+
+
+## [Transmisión Activa del Dengue en Chiapas]{ style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Semana
+:::
+
+::: grid-item
+Tuxtla Gutierrez
+:::
+
+::: grid-item
+Tapachula
+:::
+
+::: grid-item
+San Cristobal de las Casas
+:::
+
+::: grid-item
+Acumulado
+:::
+
+::: grid-item
+```{r tuxtla_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Tuxtla Gutierrez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r tapachula_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Tapachula de Cordoba y Ordoñez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r san_cristobal_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "San Cristobal de las Casas",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Último Més
+:::
+
+::: grid-item
+```{r tuxtla_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Tuxtla Gutierrez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r tapachula_ultimo_mes}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Tapachula de Cordoba y Ordoñez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r san_cristobal_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "San Cristobal de las Casas",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Últimas dos Semanas
+:::
+
+::: grid-item
+```{r tuxtla_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Tuxtla Gutierrez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+```{r tapachula_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Tapachula de Cordoba y Ordoñez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+
+```{r san_cristobal_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "San Cristobal de las Casas",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-3, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+
+:::
+
+</body>
+</html>
+
+
+## [Transmisión Activa del Dengue en Chiapas]{ style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Semana
+:::
+
+::: grid-item
+Palenque
+:::
+
+::: grid-item
+Comitan de Domínguez
+:::
+
+::: grid-item
+Huixtla
+:::
+
+::: grid-item
+Acumulado
+:::
+
+::: grid-item
+```{r palenque_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Palenque",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r comitan_acumulado}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Comitan de Dominguez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+
+```
+
+:::
+
+::: grid-item
+
+```{r huixtla_acumulado}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Huixtla",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = 1, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Último Mes
+:::
+
+::: grid-item
+```{r palenque_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Palenque",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+
+:::
+
+::: grid-item
+```{r comitan_ultimo_mes}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Comitan de Dominguez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+
+```
+
+:::
+
+::: grid-item
+
+```{r huixtla_ultimo_mes}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Huixtla",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+::: grid-item
+Últimas Dos Semanas
+:::
+
+::: grid-item
+```{r palenque_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Palenque",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+```{r comitan_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+# Step 1. load the dengue dataset geocoded ####
+densnv::mp_heatmap(locality = "Comitan de Dominguez",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 13,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, to = lubridate::epiweek(Sys.Date()), by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+
+```
+
+:::
+
+::: grid-item
+
+```{r huixtla_ultimas_dos_semanas}
+#| echo: false
+#| output: true
+densnv::mp_heatmap(locality = "Huixtla",
+                   cve_edo = "07",
+                   geocoded_datasets = z,
+                   zoom = 14,
+                   status_caso = c(1, 2),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-2, 
+                              to = lubridate::epiweek(Sys.Date()), 
+                              by = 1),
+                   alpha = 0.2,
+                   static = TRUE,
+                   map_type = "satellite")
+```
+:::
+
+
+:::
+
+</body>
+</html>
 
 
 ## [Transmisión Activa del Dengue en Oaxaca]{ style="color:#003300;"}
@@ -110,7 +1478,6 @@ Acumulado
 ```{r valles_centrales_acumulado}
 #| echo: false
 #| output: true
-# Step 1. load the dengue dataset geocoded ####
 densnv::mp_heatmap(locality = c("Oaxaca de Juarez", 
                                 "Santa María Atzompa",
                                 "San Jacinto Amilpas",
@@ -240,7 +1607,7 @@ densnv::mp_heatmap(locality = "San Pedro Pochutla",
                    cve_edo = "20",
                    geocoded_datasets = z,
                    zoom = 15,
-                   status_caso = c(2),
+                   status_caso = c( 2),
                    week = seq(from = lubridate::epiweek(Sys.Date())-4, to = lubridate::epiweek(Sys.Date()), by = 1),
                    alpha = 0.2,
                    static = TRUE,
@@ -287,9 +1654,7 @@ densnv::mp_heatmap(locality = c("Oaxaca de Juarez",
                    geocoded_datasets = z,
                    zoom = 13,
                    status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
+                   week = seq(from = lubridate::epiweek(Sys.Date())-3, to = lubridate::epiweek(Sys.Date()), by = 1),
                    alpha = 0.2,
                    static = TRUE,
                    map_type = "satellite")
@@ -356,844 +1721,3 @@ densnv::mp_heatmap(locality = c("Salina Cruz",
 
 </body>
 </html>
-
-
-## [Valles Centrales Oaxaca]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r}
-#| echo: false
-#| output: true
-densnv::mp_heatmap(locality = c("Oaxaca de Juarez", 
-                                "Santa María Atzompa",
-                                "San Jacinto Amilpas",
-                                "Santa Lucia del Camino",
-                                "San Antonio de la Cal",
-                                "Santa Cruz Xoxocotlán",
-                                "San Agustin de las Juntas"),
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_oaxaca.RData")
-deneggs::map_eggs_hotspots(betas = oax_2024$betas,
-                                locality = "Oaxaca de Juarez",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Santiago Pinotepa Nacional]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r}
-#| echo: false
-#| output: true
-densnv::mp_heatmap(locality = "Santiago Pinotepa Nacional",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_pinotepa.RData")
-deneggs::map_eggs_hotspots(betas = pino_2024$betas,
-                                locality = "Santiago Pinotepa Nacional",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Santa Maria Huatulco]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_huatulco}
-#| echo: false
-#| output: true
-densnv::mp_heatmap(locality = "Santa Maria Huatulco",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 15,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_huatulco}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_huatulco.RData")
-deneggs::map_eggs_hotspots(betas = huatulco_2024$betas,
-                                locality = "Santa Maria Huatulco",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-
-
-## [San Antonio de la Cal]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r heatmap_san_antonio_de_la_cal}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "San Antonio de la Cal",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-## [Santa Cruz Xoxocotlán]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_santa_cruz_xoxo}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Santa Cruz Xoxocotlán",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_santa_cruz_xoxo}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_santa_cruz_xoxo_2024.RData")
-deneggs::map_eggs_hotspots(betas = santa_cruz_xoxo_2024$betas,
-                                locality = "Santa Cruz Xoxocotlán",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Santa Lucia del Camino]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_santa_lucia_del_camino}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Santa Lucia del Camino",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_santa_lucia_del_camino}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_santa_lucia_del_camino.RData")
-deneggs::map_eggs_hotspots(betas = santa_lucia_del_camino_2024$betas,
-                                locality = "Santa Lucia del Camino",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Santa Maria Atzompa]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r heatmap_santa_maria_atzompa}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Santo Maria Atzompa",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-
-
-## [Heroica Ciudad de Juchitán de Zaragoza]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_juchitan_zaragoza}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Heroica Ciudad de Juchitán de Zaragoza",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_juchitan_zaragoza}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_juchitan_zaragoza.RData")
-deneggs::map_eggs_hotspots(betas = juchitan_zaragoza_2024$betas,
-                                locality = "Heroica Ciudad de Juchitán de Zaragoza",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Salina Cruz]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_salina_cruz}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Salina Cruz",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_salina_cruz}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_salina_cruz.RData")
-deneggs::map_eggs_hotspots(betas = salina_cruz_2024$betas,
-                                locality = "Salina Cruz",
-                                cve_edo = "20",
-                                palette = rcartocolor::carto_pal,
-                                name = "SunsetDark",
-                                static_map = FALSE)
-```
-:::
-
-::::
-
-## [Santo Domingo Tehuantepec]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_santo_domingo_tehuantepec}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Santo Domingo Tehuantepec",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_santo_domingo_tehuantepec}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_santa_domingo_tehuantepec.RData")
-deneggs::map_eggs_hotspots(betas = santa_domingo_tehuantepec_2024$betas,
-                           locality = "Santo Domingo Tehuantepec",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Matías Romero Avendaño]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_matias_romero_avendaño}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Matias Romero Avendaño",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_matias_romero_avendaño}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_matias_romero_avendaño.RData")
-deneggs::map_eggs_hotspots(betas = matias_romero_avendaño$betas,
-                           locality = "Matias Romero Avendaño",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Ciudad Ixtepec]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r heatmap_ciudad_ixtepec}
-#| echo: false
-#| output: true
-densnv::mp_heatmap(locality = "Ciudad Ixtepec",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-## [San Juan Bautista Tuxtepec]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_san_juan_bautista_tuxtepec}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "San Juan Bautista Tuxtepec",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 13,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_san_juan_bautista_tuxtepec}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_san_juan_bautista_tuxtepec.RData")
-deneggs::map_eggs_hotspots(betas = san_juan_bautista_tuxtepec$betas,
-                           locality = "San Juan Bautista Tuxtepex",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [Loma Bonita]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_loma_bonita}
-#| echo: false
-#| output: true
-densnv::mp_heatmap(locality = "Loma Bonita",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c( 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_loma_bonita}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_loma_bonita.RData")
-deneggs::map_eggs_hotspots(betas = loma_bonita$betas,
-                           locality = "Loma Bonita",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [San Juan Bautista Valle Nacional]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_san_juan_bautista_valle_nacional}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "San Juan Bautista Valle Nacional",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_san_juan_bautista_valle_nacional}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_san_juan_bautista_valle_nacional.RData")
-deneggs::map_eggs_hotspots(betas = san_juan_bautista_valle_nacional$betas,
-                           locality = "San Juan Bautista Valle Nacional",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-
-## [San Pedro Mixtepec Distrito 22]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r heatmap_san_pedro_mixtepec_distrito_22}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "San Pedro Mixtepec Distrito 22",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-## [San Pedro Pochutla]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_san_pedro_pochutla}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "San Pedro Pochutla",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 16,
-                   status_caso = c(2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_san_pedro_pochutla}
-#| echo: false
-#| output: true
-load("~/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_pochutla.RData")
-deneggs::map_eggs_hotspots(betas = pochutla$betas,
-                           locality = "San Pedro Pochutla",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-## [Crucecita]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-:::: {.columns}
-
-::: {.column width="50%"}
-Transmisión Activa
-```{r heatmap_crucecita}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Crucecita",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(1, 2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-:::
-
-
-::: {.column width="50%"}
-Hotspots del vector
-```{r hotspots_eggs_crucecita}
-#| echo: false
-#| output: true
-load("~/Dropbox/projects/ETV/dengue/eggs_hotspots_talks/8.RData/hotspots_eggs/hotspots_eggs_crucesita.RData")
-deneggs::map_eggs_hotspots(betas = crucesita$betas,
-                           locality = "Crucecita",
-                           cve_edo = "20",
-                           palette = rcartocolor::carto_pal,
-                           name = "SunsetDark",
-                           static_map = FALSE)
-```
-:::
-
-::::
-
-
-
-## [Heroica Ciudad de Huajuapan de Leon]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r heroica_ciudad_huajuapan_leon}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Heroica Ciudad de Huajuapan de Leon",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(1,2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-## [Putla Villa de Guerrero]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r putla_villa_guerrero}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Putla Villa de Guerrero",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 15,
-                   status_caso = c(1,2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-## [Tlacolula de Matamoros]{ style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<br> 
-<br>
-
-Transmisión Activa
-```{r tlacolula_matamoros}
-#| echo: false
-#| output: true
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2024/8.RData/denmex_2024.RData")
-densnv::mp_heatmap(locality = "Tlacolula de Matamoros",
-                   cve_edo = "20",
-                   geocoded_datasets = z,
-                   zoom = 14,
-                   status_caso = c(1,2),
-                   week = seq(from = lubridate::epiweek(Sys.Date())-3, 
-                              to = lubridate::epiweek(Sys.Date()), 
-                              by = 1),
-                   alpha = 0.2,
-                   static = TRUE,
-                   map_type = "satellite")
-```
-
-
-
-
